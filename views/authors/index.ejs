@@ -8,5 +8,10 @@
 <br>
 
 <% authors.forEach((author, i) => { %>
-  <div> - <%= author.name %></div>
+  <div> - <%= author.name %> </div>
+  <div>
+    <a href="/authors/<%= author.id %>">Show</a>
+    <a href="/authors/<%= author.id %>/edit">Edit</a>
+  </div>
+
 <% }) %>

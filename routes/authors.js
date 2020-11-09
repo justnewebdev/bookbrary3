@@ -3,6 +3,19 @@ const router = express.Router()
 
 const Author = require('../models/author')
 
+router.get('/new', (req, res) => {
+  res.render('authors/new', {author: new Author()})
+})
+
+router.get('/:id', async (req, res) => {
+  try{
+    const author = await Author.findById(req.params.id)
+    res.render('authors/show', {author})
+  }catch{
+    res.redirect('/authors')
+  }
+})
+
 router.get('/', async (req, res) => {
   let searchOptions = {}
 
@@ -21,10 +34,16 @@ router.get('/', async (req, res) => {
   }
 })
 
-
-router.get('/new', (req, res) => {
-  res.render('authors/new', {author: new Author()})
+router.get('/:id/edit', async (req, res) => {
+  try{
+    const author = await Author.findById( req.params.id)
+    res.render('authors/edit', {author})
+  }catch(err){
+    console.log(err)
+    res.redirect('/')
+  }
 })
+
 
 router.post('/', async (req, res) => {
   const author = new Author({
@@ -43,6 +62,23 @@ router.post('/', async (req, res) => {
   }
 
 })
+
+router.put('/:id', async (req, res) => {
+  let author
+  try{
+    author = await Author.findById(req.params.id)
+    author.name = req.body.name
+    await author.save()
+    res.redirect('/authors')
+  }catch{
+    if(author == null){
+      res.redirect('/')
+    }else{
+      res.redirect(`/authors/${author.id}`)
+    }
+  }
+})
+
 
 // router.use((req, res, next) => {
 //   console.log(req.url, req.method)
