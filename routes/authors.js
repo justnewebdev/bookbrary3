@@ -97,10 +97,10 @@ router.delete('/:id', async (req, res) => {
     if(author == null){
       res.redirect('/')
     }else{
-      const authors = await Author.find({})
-      res.render('authors/index', {
-        authors,
-        searchOptions: '',
+      const booksByAuthor = await Book.find({author: author.id}).limit(10).exec()
+      res.render('authors/show', {
+        author,
+        booksByAuthor,
         errorMessage: 'Cannot delete the author, cause it still has books'
       })
     }
