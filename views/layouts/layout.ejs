@@ -3,10 +3,11 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link href="/css/index.css" rel="stylesheet">
 
     <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+
+    <link href="/css/main.css" rel="stylesheet">
 
     <script defer src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
     <script defer src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
@@ -15,8 +16,12 @@
     <script defer src="/js/fileupload.js"></script>
   </head>
   <body>
-    <%- include('../partials/header') %>
-    <%- include('../partials/errorMessage') %>
-    <%- body %>
+    <div class="container">
+      <%- include('../partials/header') %>
+      <div class="inner-container">
+        <%- include('../partials/errorMessage') %>
+        <%- body %>
+      </div>
+    </div>
   </body>
 </html>
