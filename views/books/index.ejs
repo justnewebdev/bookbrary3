@@ -1,30 +1,39 @@
 <h3 class="page-header">Search Book</h3>
 
 <form action="/books" method="get">
-  <div>
-    <label>Title: </label>
-    <input type="text" name="title" value="<%= searchOptions.title %>">
+  <div class="form-row">
+    <div class="form-item">
+      <label>Title: </label>
+      <input type="text" name="title" value="<%= searchOptions.title %>">
+    </div>
   </div>
 
-  <div>
-    <label>Published Before: </label>
-    <input type="date" name="publishedBefore" value="<%= searchOptions.publishedBefore %>">
+  <div class="form-row">
+    <div class="form-item">
+      <label>Published Before: </label>
+      <input type="date" name="publishedBefore" value="<%= searchOptions.publishedBefore %>">
+    </div>
+
+    <div class="form-item">
+      <label>Published After: </label>
+      <input type="date" name="publishedAfter" value="<%= searchOptions.publishedAfter %>">
+    </div>
   </div>
 
-  <div>
-    <label>Published After: </label>
-    <input type="date" name="publishedAfter" value="<%= searchOptions.publishedAfter %>">
+  <div class="form-row form-row-end">
+    <button class="btn btn-primary">Search</button>
   </div>
-
-
-  <button>Search</button>
 </form>
 
 <% books.forEach((book, i) => { %>
-  <div><%= book.title %> - <%= book.publishDate %> -- <%= book.author %></div>
-  <img src="<%= book.coverImagePath%>" width="100" height="150">
-  <a href="/books/<%= book.id %>">Show</a>
-  <a href="/books/<%= book.id %>/edit">Edit</a>
-  <%-include('../partials/deleteForm',
-            {url: `/books/${book.id}`}) %>
+  <div>
+    <div><%= book.title %> - <%= book.publishDate.toDateString() %> -- <%= book.author.name %></div>
+    <img src="<%= book.coverImagePath%>" width="100" height="150">
+    <div class="form-row btn-row">
+      <a href="/books/<%= book.id %>" class="btn btn-primary">Show</a>
+      <a href="/books/<%= book.id %>/edit" class="btn btn-primary">Edit</a>
+      <%-include('../partials/deleteForm',
+                {url: `/books/${book.id}`}) %>
+    </div>
+  </div>
 <% }) %>

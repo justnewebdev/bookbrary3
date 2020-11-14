@@ -60,7 +60,7 @@ router.get('/', async (req, res) => {
 
 
   try{
-    const books = await query.exec()
+    const books = await query.populate('author').exec()
     res.render('books/index', {
       books,
       searchOptions: req.query
