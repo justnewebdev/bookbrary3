@@ -1,14 +1,28 @@
-FilePond.registerPlugin(
-  FilePondPluginFileEncode,
-  FilePondPluginImagePreview,
-  FilePondPluginImageResize
-)
+const rootStyle = window.getComputedStyle(document.documentElement)
 
-FilePond.setOptions({
-  stylePanelAspectRatio: 150/100,
-  imageResizeTargetWidth: 100,
-  imageResizeTargetHeight: 150,
-  imageResizeMode: 'contain'
-})
+if(rootStyle.getPropertyValue('--cover-width-large') != null && rootStyle.getPropertyValue('--cover-width-large') != ''){
+  ready()
+}else{
+  document.getElementById('main-css').addEventListener('load', ready)
+}
 
-FilePond.parse(document.body)
+function ready(){
+  const coverWidth = parseFloat(rootStyle.getPropertyValue('--cover-width-large'))
+  const coverAspectRatio = parseFloat(rootStyle.getPropertyValue('--cover-aspect-ratio'))
+  const coverHeight = coverWidth / coverAspectRatio
+
+  FilePond.registerPlugin(
+    FilePondPluginFileEncode,
+    FilePondPluginImagePreview,
+    FilePondPluginImageResize
+  )
+
+  FilePond.setOptions({
+    stylePanelAspectRatio: coverAspectRatio,
+    imageResizeTargetWidth: coverWidth,
+    imageResizeTargetHeight: coverHeight,
+    imageResizeMode: 'contain'
+  })
+
+  FilePond.parse(document.body)
+}

@@ -1,0 +1,18 @@
+<% bookCoverClass = locals.large ? 'book-cover-large' : '' %>
+<% bookGridClass = locals.large ? 'book-grid-large' : '' %>
+
+<div class="book-grid <%= bookGridClass %>">
+<% books.forEach((book, i) => { %>
+    <a href="/books/<%= book.id %>">
+      <img class="book-cover <%= bookCoverClass %>" src="<%= book.coverImagePath%>">
+    </a>
+    <% if(locals.form) { %>
+      <div class="form-row btn-row">
+        <a href="/books/<%= book.id %>" class="btn btn-primary">Show</a>
+        <a href="/books/<%= book.id %>/edit" class="btn btn-primary">Edit</a>
+        <%-include('../partials/deleteForm',
+                  {url: `/books/${book.id}`}) %>
+      </div>
+    <% } %>
+<% }) %>
+</div>
