@@ -6,8 +6,9 @@
 	<div style="display: flex; flex-direction: column;">
     <a href="/books/<%= book.id %>">
       <img class="book-cover <%= bookCoverClass %>" src="<%= book.coverImagePath%>">
+       <span style="text-align: center; margin: .5rem 0; text-decoration: none"><%= book.title %></span>
     </a>
-    <span style="text-align: center; margin: .5rem 0"><%= book.title %></span>
+   
     <% if(locals.form) { %>
       <div class="form-row btn-row">
         <a href="/books/<%= book.id %>" class="btn btn-primary">Show</a>
