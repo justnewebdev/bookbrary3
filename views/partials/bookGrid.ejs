@@ -3,6 +3,7 @@
 
 <div class="book-grid <%= bookGridClass %>">
 <% books.forEach((book, i) => { %>
+	<div style="display: flex; direction: row;">
     <a href="/books/<%= book.id %>">
       <img class="book-cover <%= bookCoverClass %>" src="<%= book.coverImagePath%>">
     </a>
@@ -14,5 +15,6 @@
                   {url: `/books/${book.id}`}) %>
       </div>
     <% } %>
+    </div>
 <% }) %>
 </div>
