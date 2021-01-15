@@ -3,7 +3,7 @@
 
 <div class="book-grid <%= bookGridClass %>">
 <% books.forEach((book, i) => { %>
-	<div style="display: flex; direction: row;">
+	<div style="display: flex; flex-direction: column;">
     <a href="/books/<%= book.id %>">
       <img class="book-cover <%= bookCoverClass %>" src="<%= book.coverImagePath%>">
     </a>
