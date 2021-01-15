@@ -4,9 +4,9 @@
 <div class="book-grid <%= bookGridClass %>">
 <% books.forEach((book, i) => { %>
 	<div style="display: flex; flex-direction: column;">
-    <a href="/books/<%= book.id %>">
+    <a href="/books/<%= book.id %>" style="text-align: center; text-decoration: none">
       <img class="book-cover <%= bookCoverClass %>" src="<%= book.coverImagePath%>">
-       <span style="text-align: center; margin: .5rem 0; text-decoration: none"><%= book.title %></span>
+       <span style="margin: .5rem 0;"><%= book.title %></span>
     </a>
    
     <% if(locals.form) { %>
