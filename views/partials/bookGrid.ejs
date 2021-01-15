@@ -7,6 +7,7 @@
     <a href="/books/<%= book.id %>">
       <img class="book-cover <%= bookCoverClass %>" src="<%= book.coverImagePath%>">
     </a>
+    <span style="text-align: center"><%= book.title %></span>
     <% if(locals.form) { %>
       <div class="form-row btn-row">
         <a href="/books/<%= book.id %>" class="btn btn-primary">Show</a>
