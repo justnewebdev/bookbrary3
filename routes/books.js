@@ -9,7 +9,7 @@ const Book = require('../models/book')
 
 // const uploadPath = path.join('public', Book.coverImageBasePath)
 
-const imageMimeTypes = ['image/jpg', 'image/png', 'image/gif']
+const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif']
 
 // const upload = multer({
 //   dest: uploadPath,
@@ -58,9 +58,10 @@ router.get('/', async (req, res) => {
     query.gte('publishDate', req.query.publishedAfter)
   }
 
+	console.log(query)
 
   try{
-    const books = await query.populate('author').exec()
+    const books = await query.sort({createdAt: 'desc'}).populate('author').exec()
     res.render('books/index', {
       books,
       searchOptions: req.query
@@ -98,10 +99,10 @@ router.put('/:id', async (req, res) => {
   let book
   try{
     book = await Book.findById(req.params.id)
-    book.title = req.body.title,
-    book.author = req.body.author,
-    book.publishDate = req.body.publishDate,
-    book.pageCount = req.body.pageCount,
+    book.title = req.body.title
+    book.author = req.body.author
+    book.publishDate = new Date(req.body.publishDate)
+    book.pageCount = req.body.pageCount
     book.description = req.body.description
     if(req.body.cover != null && req.body.cover != ''){
       saveCover(book, req.body.cover)
