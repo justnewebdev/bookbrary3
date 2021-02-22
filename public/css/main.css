@@ -48,6 +48,7 @@ footer{
   margin: auto;
   margin-bottom: 10px;
   padding: .5rem;
+  background-color: rgba(0, 0, 0, .5);
   color: rgba(255, 193, 69, 0.7);
   font-size: .7rem;
   border: 1px solid white;
